@@ -2,9 +2,9 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.mycompany</groupId>
+	<groupId>1c8bbba2-199d-4ba7-a9b0-96d9788b2f07</groupId>
 	<artifactId>test2.0</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<packaging>mule-application</packaging>
 
 	<name>test2.0</name>
@@ -30,38 +30,25 @@
 				<version>${mule.maven.plugin.version}</version>
 				<extensions>true</extensions>
 	             <configuration>
-				   <cloudHubDeployment>
+					<classifier>mule-application</classifier>
+				   <cloudhub2Deployment>
 				       <uri>https://anypoint.mulesoft.com</uri>
-				       <muleVersion>${mule.version}</muleVersion>
-				       <username>${anypoint.username}</username>
-				       <password>${anypoint.password}</password>
-				       <environment>${env}</environment>
-				       <applicationName>${app.name}</applicationName>
-				       <businessGroup>${businessGroup}</businessGroup>
-				       <workerType>${workerType}</workerType>
-				       <workers>${workerSize}</workers>
-				       <objectStoreV2>true</objectStoreV2>
-				   </cloudHubDeployment>
+					   <provider>MC</provider>
+				       <environment>Sandbox</environment>
+					   <target>Cloudhub-US-East-2</target>
+					   <server>Repository</server>
+				       <applicationName>${project.artifactId}</applicationName>
+				       <releaseChannel>NONE</releaseChannel>
+					   <replicas>1</replicas>
+					   <vCores>0.1</vCores>
+					   <deploymentSettings>
+						<generateDefaultPublicUrl>true</generateDefaultPublicUrl>
+					   </deploymentSettings>
+				   </cloudhub2Deployment>
 				 </configuration>	
 			</plugin>
 		</plugins>
 	</build>
-
-	<dependencies>
-		<dependency>
-			<groupId>org.mule.connectors</groupId>
-			<artifactId>mule-http-connector</artifactId>
-			<version>1.9.1</version>
-			<classifier>mule-plugin</classifier>
-		</dependency>
-		<dependency>
-			<groupId>org.mule.connectors</groupId>
-			<artifactId>mule-sockets-connector</artifactId>
-			<version>1.2.4</version>
-			<classifier>mule-plugin</classifier>
-		</dependency>
-	</dependencies>
-
 	<repositories>
 		<repository>
 			<id>anypoint-exchange-v3</id>
@@ -75,6 +62,12 @@
 			<url>https://repository.mulesoft.org/releases/</url>
 			<layout>default</layout>
 		</repository>
+		<repository>
+            <id>Repository</id>
+            <name>Private Exchange repository</name>
+            <url>https://maven.anypoint.mulesoft.com/api/v3/organizations/${project.groupId}/maven</url>
+            <layout>default</layout>
+        </repository>
 	</repositories>
 
 	<pluginRepositories>
@@ -88,5 +81,21 @@
 			</snapshots>
 		</pluginRepository>
 	</pluginRepositories>
-
+	
+	<dependencies>
+		<dependency>
+			<groupId>org.mule.connectors</groupId>
+			<artifactId>mule-http-connector</artifactId>
+			<version>1.9.1</version>
+			<classifier>mule-plugin</classifier>
+		</dependency>
+	</dependencies>
+    <distributionManagement>
+		<repository>
+			<id>Repository</id>
+			<name>Corporate Repository</name>
+			<url>https://maven.anypoint.mulesoft.com/api/v3/organizations/${project.groupId.}/maven</url>
+			<layout>default</layout>
+		</repository>
+	</distributionManagement>
 </project>
