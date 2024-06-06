@@ -54,9 +54,9 @@ jobs:
               distribution: "zulu"
               java-version: 8
           
-          #- name: Publish to Exchange
-          #  run: |
-          #    mvn deploy --settings .maven/settings.xml  -Dclient.id="${{ secrets.CONNECTED_APP_CLIENT_ID }}" -Dclient.secret="${{ secrets.CONNECTED_APP_CLIENT_SECRET }}"
+          - name: Publish to Exchange
+            run: |
+              mvn deploy --settings .maven/settings.xml  -Dclient.id=4344766d4822478088312d19b7697bb4 -Dclient.secret=2132F3154d0C47F18D24cF24CB351013
           - name: Deploy to CloudHub 2.0
             run: |
-              mvn deploy --settings .maven/settings.xml  -DmuleDeploy -Dclient.id="${{secrets.CONNECTED_APP_CLIENT_ID}}" -Dclient.secret="${{secrets.CONNECTED_APP_CLIENT_SECRET}}"      
+              mvn deploy --settings .maven/settings.xml  -DmuleDeploy -Dclient.id=4344766d4822478088312d19b7697bb4 -Dclient.secret=2132F3154d0C47F18D24cF24CB351013      

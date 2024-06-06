@@ -6,7 +6,7 @@
   <servers>
     <server>
       <id>Repository</id>
-      <username>~~~Client~~~</username>
+      <username>~~~client~~~</username>
       <password>${client.id}~?~${client.secret}</password>
     </server>
   </servers>
